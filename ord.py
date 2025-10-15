@@ -2,33 +2,13 @@ from __future__ import annotations
 
 __all__ = (
     "Amount",
-    "Analysis",
-    "AnalysisType",
     "Compound",
     "CompoundIdentifier",
     "CompoundIdentifierType",
     "CompoundPreparation",
     "CompoundPreparationType",
     "CompoundSource",
-    "Concentration",
-    "ConcentrationUnit",
     "CrudeComponent",
-    "Current",
-    "CurrentUnit",
-    "Data",
-    "DateTime",
-    "ElectrochemistryConditions",
-    "ElectrochemistryConditionsElectrochemistryCell",
-    "ElectrochemistryCellType",
-    "ElectrochemistryConditionsElectrochemistryMeasurement",
-    "ElectrochemistryType",
-    "FloatValue",
-    "FlowConditions",
-    "FlowType",
-    "FlowConditionsTubing",
-    "TubingType",
-    "FlowRate",
-    "FlowRateUnit",
     "IlluminationConditions",
     "IlluminationType",
     "Length",
@@ -38,7 +18,6 @@ __all__ = (
     "Moles",
     "MolesUnit",
     "Percentage",
-    "Person",
     "Pressure",
     "PressureConditions",
     "PressureConditionsAtmosphere",
@@ -49,33 +28,21 @@ __all__ = (
     "PressureMeasurementType",
     "PressureUnit",
     "ProductCompound",
-    "ProductMeasurement",
-    "ProductMeasurementMassSpecMeasurementDetails",
-    "MassSpecMeasurementType",
-    "ProductMeasurementType",
-    "ProductMeasurementSelectivity",
-    "SelectivityType",
     "Reaction",
     "ReactionConditions",
-    "ReactionIdentifier",
-    "ReactionIdentifierType",
     "ReactionInput",
     "ReactionInputAdditionDevice",
     "AdditionDeviceType",
     "ReactionInputAdditionSpeed",
     "AdditionSpeedType",
     "ReactionNotes",
-    "ReactionObservation",
     "ReactionOutcome",
-    "ReactionProvenance",
-    "ReactionRole",
     "ReactionRoleType",
     "ReactionSetup",
     "ReactionSetupReactionEnvironment",
     "ReactionEnvironmentType",
     "ReactionWorkup",
     "ReactionWorkupType",
-    "RecordEvent",
     "StirringConditions",
     "StirringMethodType",
     "StirringConditionsStirringRate",
@@ -101,8 +68,6 @@ __all__ = (
     "VesselPreparation",
     "VesselPreparationType",
     "VesselType",
-    "Voltage",
-    "VoltageUnit",
     "Volume",
     "VolumeUnit",
     "Wavelength",
@@ -111,136 +76,6 @@ __all__ = (
 
 import enum
 from dataclasses import dataclass
-
-
-class AnalysisType(enum.Enum):
-    """
-    TODO(ccoley): Solicit more feedback from experimentalists
-    """
-
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    LC = 2
-    """
-    Liquid chromatography, including HPLC and UPLC.
-    """
-
-    GC = 3
-    """
-    Gas chromatography.
-    """
-
-    IR = 4
-    """
-    Infrared spectroscopy, including ReactIR.
-    """
-
-    NMR_1H = 5
-    """
-    1H NMR spectroscopy.
-    """
-
-    NMR_13C = 6
-    """
-    13C NMR spectroscopy.
-    """
-
-    NMR_OTHER = 7
-    """
-    Specify type and details in "details".
-    """
-
-    MP = 8
-    """
-    Melting point characterization.
-    """
-
-    UV = 9
-    """
-    Ultraviolet spectroscopy.
-    """
-
-    TLC = 10
-    """
-    Thin-layer chromatography.
-    """
-
-    MS = 11
-    """
-    Mass spectrometry.
-    """
-
-    HRMS = 12
-    """
-    High resolution mass spectrometry.
-    """
-
-    MSMS = 13
-    """
-    Two-dimensional mass spectrometry.
-    """
-
-    WEIGHT = 14
-    """
-    Weight of an isolated compound.
-    """
-
-    LCMS = 15
-    """
-    Combined LC/MS.
-    """
-
-    GCMS = 16
-    """
-    Combined GC/MS.
-    """
-
-    ELSD = 17
-    """
-    Evaporative light scattering detector.
-    """
-
-    CD = 18
-    """
-    Circular Dichroism.
-    """
-
-    SFC = 19
-    """
-    Supercritical fluid chromatography.
-    """
-
-    EPR = 20
-    """
-    Electron paramagnetic resonance spectroscopy.
-    """
-
-    XRD = 21
-    """
-    X-ray diffraction, including single-crystal XRD.
-    """
-
-    RAMAN = 22
-    """
-    Raman spectroscopy.
-    """
-
-    ED = 23
-    """
-    Electron diffraction, including MicroED.
-    """
-
-    OPTICAL_ROTATION = 24
-    """
-    optical rotation.
-    """
-
-    CAD = 25
-    """
-    Charged Aerosol Detector.
-    """
 
 
 class CompoundIdentifierType(enum.Enum):
@@ -359,99 +194,6 @@ class CompoundPreparationType(enum.Enum):
     """
     Compound synthesized in-house.
     """
-
-
-class ConcentrationUnit(enum.Enum):
-    UNSPECIFIED = 0
-
-    MOLAR = 1
-
-    MILLIMOLAR = 2
-
-    MICROMOLAR = 3
-
-
-class CurrentUnit(enum.Enum):
-    UNSPECIFIED = 0
-
-    AMPERE = 1
-
-    MILLIAMPERE = 2
-
-
-class ElectrochemistryCellType(enum.Enum):
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    DIVIDED_CELL = 2
-
-    UNDIVIDED_CELL = 3
-
-
-class ElectrochemistryType(enum.Enum):
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    CONSTANT_CURRENT = 2
-
-    CONSTANT_VOLTAGE = 3
-
-
-class FlowType(enum.Enum):
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    PLUG_FLOW_REACTOR = 2
-
-    CONTINUOUS_STIRRED_TANK_REACTOR = 3
-
-    PACKED_BED_REACTOR = 4
-
-
-class TubingType(enum.Enum):
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    STEEL = 2
-
-    COPPER = 3
-
-    PFA = 4
-
-    FEP = 5
-
-    TEFLONAF = 6
-
-    PTFE = 7
-
-    GLASS = 8
-
-    QUARTZ = 9
-
-    SILICON = 10
-    """
-    e.g., a chip-based microreactor
-    """
-
-    PDMS = 11
-
-
-class FlowRateUnit(enum.Enum):
-    UNSPECIFIED = 0
-
-    MICROLITER_PER_MINUTE = 1
-
-    MICROLITER_PER_SECOND = 2
-
-    MILLILITER_PER_MINUTE = 3
-
-    MILLILITER_PER_SECOND = 4
-
-    MICROLITER_PER_HOUR = 5
 
 
 class IlluminationType(enum.Enum):
@@ -595,156 +337,6 @@ class PressureMeasurementType(enum.Enum):
     CUSTOM = 1
 
     PRESSURE_TRANSDUCER = 2
-
-
-class MassSpecMeasurementType(enum.Enum):
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    TIC = 2
-
-    TIC_POSITIVE = 3
-
-    TIC_NEGATIVE = 4
-
-    EIC = 5
-
-
-class ProductMeasurementType(enum.Enum):
-    """
-    The type of measurement. While each measurement is associated with a
-    specific product compound and is cross-referenced to an analysis through
-    the analysis_key, there is still ambiguity as to what a measurement
-    truly represents. For example, an LCMS analysis can lead to a quantitative
-    YIELD if an authentic standard and internal standard are used to obtain
-    a calibration curve; sometimes, it is only used to obtain an uncalibrated
-    "yield" that is better described as an peak AREA or integrated EIC
-    COUNTS. Understanding the fidelity of the approach taken to measure
-    the performance of a reaction is important for downstream learning tasks.
-    Note that this message is intended to capture product-specific data
-    extracted from an analysis. The raw analytical data (e.g., a full NMR
-    spectrum) should be defined in an Analysis message. Even analyses
-    of ostensibly pure compounds (e.g., HRMS) should have their results
-    defined in the Analysis message (with is_of_isolated_species set
-    to True) but with a cross-reference to a product via a ProductMessage
-    (e.g., of type IDENTITY for HRMS).
-    """
-
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    IDENTITY = 2
-    """
-    An identity type indicates that the corresponding analysis was used
-    to confirm the identity of the reported product.
-    """
-
-    YIELD = 3
-    """
-    Yields should only be reported as quantitative yields, e.g., measured
-    using an isolated weight analysis, quantitative NMR with an internal
-    standard, LC peak area with an internal standard and calibration curve
-    obtained using an authentic standard.
-    """
-
-    SELECTIVITY = 4
-    """
-    Selectivites include enantiomeric excess/ratios, diastereomeric ratios,
-    etc. The detailed type should be specified in selectivity_type.
-    """
-
-    PURITY = 5
-    """
-    The apparent purity of the product mixture accoridng to a specific
-    analysis (e.g,. qNMR, LC).
-    """
-
-    AREA = 6
-    """
-    Integrated peak area, e.g., as in an LC chromatogram.
-    """
-
-    COUNTS = 7
-    """
-    Raw counts, e.g., as in an EIC or TIC from a MS analysis. If an EIC,
-    the m/z ratio(s) should be defined in the details.
-    """
-
-    INTENSITY = 8
-    """
-    Intensity, e.g., of a TLC spot, ELSD, or GC FID.
-    """
-
-    AMOUNT = 9
-    """
-    Quantitative amount of this product as defined in the "amount" field,
-    usually as a mass.
-    """
-
-
-class SelectivityType(enum.Enum):
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    EE = 2
-    """
-    Enantiomeric excess as a percentage (desired - undesired).
-    """
-
-    ER = 3
-    """
-    Enantiomeric ratio. (x:1) (desired / undesired).
-    """
-
-    DR = 4
-    """
-    Diasteromeric ratio. (x:1) (desired / undesired).
-    """
-
-    EZ = 5
-    """
-    Alkene geometry ratio. (x:1) (E / Z)
-    """
-
-    ZE = 6
-    """
-    Alkene geometry ratio. (x:1) (Z / E)
-    """
-
-
-class ReactionIdentifierType(enum.Enum):
-    """
-    Possible identifier types are listed in an enum for extensibility
-    """
-
-    UNSPECIFIED = 0
-
-    CUSTOM = 1
-
-    REACTION_SMILES = 2
-
-    REACTION_CXSMILES = 6
-    """
-    Extended SMILES.
-    """
-
-    RDFILE = 3
-    """
-    Reaction data file.
-    """
-
-    RINCHI = 4
-    """
-    Reaction InChI.
-    """
-
-    REACTION_TYPE = 5
-    """
-    Named reaction or reaction category.
-    """
 
 
 class AdditionDeviceType(enum.Enum):
@@ -1228,14 +820,6 @@ class VesselPreparationType(enum.Enum):
     PURGED = 6
 
 
-class VoltageUnit(enum.Enum):
-    UNSPECIFIED = 0
-
-    VOLT = 1
-
-    MILLIVOLT = 2
-
-
 class VolumeUnit(enum.Enum):
     UNSPECIFIED = 0
 
@@ -1291,38 +875,6 @@ class Amount:
 
 
 @dataclass
-class Analysis:
-    type: AnalysisType
-
-    details: str
-    """
-    Any details about analysis (e.g., NMR type, columns, gradients).
-    """
-
-    chmo_id: int
-    """
-    Whether this analysis is intended to be of an isolated species. If false
-    RSC Chemical Methods Ontology ID to define the analytical method with
-    greater specificity. Defined at https://github.com/rsc-ontologies/rsc-cmo.
-    """
-
-    is_of_isolated_species: bool | None
-    """
-    or unspecified, the assumption is that it is of a crude product mixture
-    (or a partially worked-up product mixture).
-    """
-
-    data: dict[str, Data]
-    """
-    Data values or files (raw, processed, or annotated).
-    """
-
-    instrument_manufacturer: str
-
-    instrument_last_calibrated: DateTime | None
-
-
-@dataclass
 class Compound:
     """
     *
@@ -1350,20 +902,6 @@ class Compound:
     preparations: list[CompoundPreparation]
 
     source: CompoundSource | None
-
-    features: dict[str, Data]
-    """
-    Compounds can accommodate any number of features. These may include simple
-    properties of the compound (e.g., molecular weight), heuristic estimates
-    of physical properties (e.g., ClogP), optimized geometries (e.g., through
-    DFT), and calculated stereoelectronic descriptors.
-    """
-
-    analyses: dict[str, Analysis]
-    """
-    Compounds may be assayed for quality control; analytical data should be
-    defined in the analyses map.
-    """
 
     texture: Texture | None
 
@@ -1439,18 +977,6 @@ class CompoundPreparation:
 
 
 @dataclass
-class Concentration:
-    value: float | None
-
-    precision: float | None
-    """
-    Precision of the measurement (with the same units as `value`).
-    """
-
-    units: ConcentrationUnit
-
-
-@dataclass
 class CrudeComponent:
     """
     *
@@ -1491,18 +1017,6 @@ class CrudeComponent:
 
 
 @dataclass
-class Current:
-    value: float | None
-
-    precision: float | None
-    """
-    Precision of the measurement (with the same units as `value`).
-    """
-
-    units: CurrentUnit
-
-
-@dataclass
 class Data:
     """
     Data is a container for arbitrary data.
@@ -1534,98 +1048,6 @@ class Data:
     Description of the file format (if applicable); usually the file extension.
     For example, 'png' or 'tiff' for images. If empty, we assume string data.
     """
-
-
-@dataclass
-class DateTime:
-    value: str
-
-
-@dataclass
-class ElectrochemistryConditions:
-    type: ElectrochemistryType
-
-    details: str
-
-    current: Current | None
-
-    voltage: Voltage | None
-
-    anode_material: str
-
-    cathode_material: str
-
-    electrode_separation: Length | None
-
-    measurements: list[ElectrochemistryConditionsElectrochemistryMeasurement]
-
-    cell: ElectrochemistryConditionsElectrochemistryCell | None
-
-
-@dataclass
-class ElectrochemistryConditionsElectrochemistryCell:
-    type: ElectrochemistryCellType
-
-    details: str
-    """
-    Include electrochemistry reaction-ware specifications, e.g., home-made
-    vs. commercial cell and details.
-    """
-
-
-@dataclass
-class ElectrochemistryConditionsElectrochemistryMeasurement:
-    time: Time | None
-
-    current: Current | None
-
-    voltage: Voltage | None
-
-
-@dataclass
-class FloatValue:
-    """
-    Wrapper for floats to include a precision.
-    """
-
-    value: float | None
-
-    precision: float | None
-    """
-    Precision of the measurement (with the same units as `value`).
-    """
-
-
-@dataclass
-class FlowConditions:
-    type: FlowType
-
-    details: str
-
-    pump_type: str
-
-    tubing: FlowConditionsTubing | None
-
-
-@dataclass
-class FlowConditionsTubing:
-    type: TubingType
-
-    details: str
-
-    diameter: Length | None
-
-
-@dataclass
-class FlowRate:
-    value: float | None
-
-    precision: float | None
-    """
-    Precision of the measurement (with the same units as `value`).
-    """
-
-    units: FlowRateUnit
 
 
 @dataclass
@@ -1695,19 +1117,6 @@ class Percentage:
 
 
 @dataclass
-class Person:
-    username: str
-
-    name: str
-
-    orcid: str
-
-    organization: str
-
-    email: str
-
-
-@dataclass
 class Pressure:
     value: float | None
 
@@ -1721,6 +1130,7 @@ class Pressure:
 
 @dataclass
 class PressureConditions:
+
     control: PressureConditionsPressureControl | None
 
     setpoint: Pressure | None
@@ -1767,23 +1177,9 @@ class ProductCompound:
 
     is_desired_product: bool | None
 
-    measurements: list[ProductMeasurement]
-    """
-    Each ProductMeasurement describes a connection between this product and an
-    Analysis. This includes information about how the identity of the
-    product was confirmed. It also contains quantitative standardized
-    performance metrics like quantitative yield as well as unstandardized
-    (and unnormalized) metrics like an integrated UV peak area.
-    """
-
     isolated_color: str
 
     texture: Texture | None
-
-    features: dict[str, Data]
-    """
-    Any features (e.g., calculated descriptors) of the product compound.
-    """
 
     reaction_role: ReactionRoleType
     """
@@ -1793,149 +1189,6 @@ class ProductCompound:
     whether desired or undesired. Recovered starting materials can be
     specified as REACTANT, REAGENT, CATALYST, etc. as appropriate.
     """
-
-
-@dataclass
-class ProductMeasurement:
-    """
-
-
-    Oneofs:
-        - value: The value for this measurement.
-    """
-
-    analysis_key: str
-    """
-    The key of the analysis used to calculate this product-specific
-    measurement; this should cross-reference the outcome.analyses map.
-    """
-
-    type: ProductMeasurementType
-
-    details: str
-    """
-    Additional information about the measurement and, in particular, how it
-    was calculated if that is ambiguous given the analysis type.
-    """
-
-    uses_internal_standard: bool | None
-    """
-    Whether an internal standard was used for this measurement to normalize
-    it, e.g., for quantification of yield or relative peak area.
-    """
-
-    is_normalized: bool | None
-    """
-    Whether the reported measurement has already been normalized to the
-    internal standard, if an internal standard was used.
-    """
-
-    uses_authentic_standard: bool | None
-    """
-    Whether an authentic sample of a material was used for callibrating
-    an analytical technique, e.g., for product identification by LCMS.
-    "Authentic" refers to a sample of a compound whose structure has been
-    proven by the accepted means (1H NMR, 13C NMR, IR, HRMS), and is now
-    being used as a comparison for other analytical methods.
-    """
-
-    authentic_standard: Compound | None
-    """
-    Details about the authentic standard used, optionally including
-    information about its precise salt form and source/vendor.
-    """
-
-    percentage: Percentage | None
-    """
-    A percentage value and its precision, as should be used for yields,
-    purities, and some selectivities like EE. Note that a 50% yield
-    corresponds to a percentage.value of 50 and not 0.5.
-    """
-
-    float_value: FloatValue | None
-    """
-    A float value and its precision, as should be used for areas, counts,
-    intensities, and some selectivities.
-    """
-
-    string_value: str | None
-    """
-    A string value, as should be used for measurements that cannot be
-    captured as floats or percentages. For example, complex selectivities
-    such as "2:1:1". Note that in the case of a 2:1:1 selectivity, however,
-    it is preferable to define the 3 distinct products specifically and
-    record the 3 product-specific measurements (e.g., peak areas) that
-    were used to derive the "2:1:1" summary statistic.
-    """
-
-    amount: Amount | None
-    """
-    Quantitative amount of this product. Measurements of this type should
-    be linked to an analysis of type WEIGHT. Separate ProductMeasurement
-    entries should be used to capture multiple amounts, such as mass and
-    moles. However, since moles is derived from mass, recording just the
-    mass is fine.
-    """
-
-    retention_time: Time | None
-    """
-    A time to be used only when specifying the retention time at which a peak
-    area or intensity was calculated, e.g., as in LC, LCMS, GC, or GCMS.
-    """
-
-    mass_spec_details: ProductMeasurementMassSpecMeasurementDetails | None
-
-    selectivity: ProductMeasurementSelectivity | None
-
-    wavelength: Wavelength | None
-    """
-    The wavelength used for e.g. LC quantification.
-    """
-
-
-@dataclass
-class ProductMeasurementMassSpecMeasurementDetails:
-    """
-    More details about how a particular performance metric (e.g., counts)
-    was calculated from an analysis using mass spec. This includes
-    distinguishing total ion current (TIC) counts from extracted ion
-    chromatogram (EIC) counts and their corresponding mass ranges or masses.
-    """
-
-    type: MassSpecMeasurementType
-
-    details: str
-
-    tic_minimum_mz: float | None
-    """
-    The lower bound of the m/z interval used to calculate the TIC counts.
-    """
-
-    tic_maximum_mz: float | None
-    """
-    The upper bound of the m/z interval used to calculate the TIC counts.
-    """
-
-    eic_masses: list[float]
-    """
-    A list of m/z ratios that were used to calculate the peak area or
-    intensity from an extracted ion chromatogram (EIC), e.g., from an LCMS
-    analysis.
-    """
-
-
-@dataclass
-class ProductMeasurementSelectivity:
-    """
-    The more specific type of selectivity that is being reported, e.g., EE,
-    ER, DR, EZ, ZE. EZ, ER, and DR assume that any product labeled as desired
-    is first in the calculation, whereas EZ and ZE ratios are calculated as
-    written. Only to be used when the type is SELECTIVITY.
-    """
-
-    type: SelectivityType
-
-    details: str
 
 
 @dataclass
@@ -1956,8 +1209,6 @@ class Reaction:
     as enum values. For instance, we want 'CUSTOM' to be a valid value for all
     enums that support custom types.
     """
-
-    identifiers: list[ReactionIdentifier]
 
     inputs: dict[str, ReactionInput]
     """
@@ -1985,8 +1236,6 @@ class Reaction:
     Reaction notes largely pertain to safety considerations.
     """
 
-    observations: list[ReactionObservation]
-
     workups: list[ReactionWorkup]
     """
     Workup steps are listed in the order they are performed.
@@ -1998,11 +1247,6 @@ class Reaction:
     structures at a particular reaction time.
     """
 
-    provenance: ReactionProvenance | None
-    """
-    Provenance contains details of the experimenter and record writer.
-    """
-
     reaction_id: str
     """
     Official ID for this reaction in the Open Reaction Database.
@@ -2011,6 +1255,7 @@ class Reaction:
 
 @dataclass
 class ReactionConditions:
+
     temperature: TemperatureConditions | None
 
     pressure: PressureConditions | None
@@ -2018,10 +1263,6 @@ class ReactionConditions:
     stirring: StirringConditions | None
 
     illumination: IlluminationConditions | None
-
-    electrochemistry: ElectrochemistryConditions | None
-
-    flow: FlowConditions | None
 
     reflux: bool | None
 
@@ -2037,31 +1278,6 @@ class ReactionConditions:
     """
     A catch-all string field for providing more information about
     the conditions (e.g., multiple stages)
-    """
-
-
-@dataclass
-class ReactionIdentifier:
-    """
-    *
-    Reaction identifiers define descriptions of the overall reaction.
-    While we encourage the use of SMILES strings, these do not work well in
-    all cases. The <reaction_smiles> field should be able to be derived
-    from the information present in the ReactionInput and ReactionOutcome
-    fields of any Reaction message.
-    """
-
-    type: ReactionIdentifierType
-
-    details: str
-
-    value: str
-
-    is_mapped: bool | None
-    """
-    Whether identifier contains atom-to-atom mapping information. When True,
-    we encourage users to specify how that mapping was obtained in the
-    details field (e.g., manually, using NameRXN, using ChemDraw).
     """
 
 
@@ -2124,11 +1340,6 @@ class ReactionInput:
     addition_duration: Time | None
     """
     Quantitatively, how long addition took
-    """
-
-    flow_rate: FlowRate | None
-    """
-    For continuous synthesis, we instead specify a flow rate.
     """
 
     addition_device: ReactionInputAdditionDevice | None
@@ -2209,21 +1420,6 @@ class ReactionNotes:
 
 
 @dataclass
-class ReactionObservation:
-    time: Time | None
-    """
-    The reaction time at which the observation was made.
-    """
-
-    comment: str
-    """
-    e.g. what color is the reaction?
-    """
-
-    image: Data | None
-
-
-@dataclass
 class ReactionOutcome:
     """
     *
@@ -2258,52 +1454,6 @@ class ReactionOutcome:
     are measured, these starting materials may also be defined as product
     species.
     """
-
-    analyses: dict[str, Analysis]
-    """
-    Analyses are stored in a map to associate each with a unique key.
-    The key is cross-referenced in ProductCompound's ProductMeasurement
-    messages to indicate which analyses were used to derive which performance
-    values/metrics. The string used for the key carries no meaning outside of
-    this cross-referencing.
-    """
-
-
-@dataclass
-class ReactionProvenance:
-    experimenter: Person | None
-
-    city: str
-
-    experiment_start: DateTime | None
-
-    doi: str
-
-    patent: str
-
-    publication_url: str
-
-    record_created: RecordEvent | None
-
-    record_modified: list[RecordEvent]
-
-    reaction_metadata: dict[str, Data]
-    """
-    Container for arbitrary reaction metadata; e.g., an internal project
-    identifier.
-    """
-
-    is_mined: bool | None
-    """
-    Set to true for programmatically extracted data; e.g., text mining from
-    patents. Set to false for manually curated data or template enumeration
-    from structured data (like a spreadsheet).
-    """
-
-
-@dataclass
-class ReactionRole:
-    pass
 
 
 @dataclass
@@ -2376,15 +1526,6 @@ class ReactionWorkup:
     "details", e.g., instrument manufacturer, solvent gradient
     (if applicable), column material and size, etc.
     """
-
-
-@dataclass
-class RecordEvent:
-    time: DateTime | None
-
-    person: Person | None
-
-    details: str
 
 
 @dataclass
@@ -2592,19 +1733,8 @@ class VesselPreparation:
 
 
 @dataclass
-class Voltage:
-    value: float | None
-
-    precision: float | None
-    """
-    Precision of the measurement (with the same units as `value`).
-    """
-
-    units: VoltageUnit
-
-
-@dataclass
 class Volume:
+
     value: float | None
 
     precision: float | None
@@ -2617,6 +1747,7 @@ class Volume:
 
 @dataclass
 class Wavelength:
+
     value: float | None
 
     precision: float | None
